@@ -26,7 +26,16 @@ These instructions will help you set up and run the network scanner on your loca
 
 ## Usage
 
-Run the network scanner using the following command:
+Run the network sniffer using the following command:
 
 ```bash
-python scanner.py
+python scanner.py [host_ip]
+
+### Command Line Options
+
+- `host_ip` Specify the host IP address to bind the socket
+
+## Features
+
+- Sends UDP messages to all hosts in a specified subnet.
+- Sniffs incoming ICMP packets to detect live hosts.

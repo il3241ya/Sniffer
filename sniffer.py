@@ -10,8 +10,8 @@ from src.ip import IP
 from src.icmp import ICMP
 
 MESSAGE = 'CHECKMESSAGE'
-HOST  = '' # CHANGE THIS
-SUBNET = '' # CHANGE THIS
+HOST  = '' 
+SUBNET = '' 
 
 
 class Scanner:
@@ -80,7 +80,20 @@ class Scanner:
             sys.exit()
 
 
+def parser_arguments():
+    parser = argparse.ArgumentParser(description="Network Sniffer")
+    parser.add_argument("host", type=str, nargs='?', default=HOST, help="Host IP address")
+    return parser.parse_args()
+
+
+def ip_to_subnet(ip):
+    network = ipaddress.ip_network(f'{ip}/24', strict=False)
+    return network
+
 if __name__ == "__main__":
+    args = parser_arguments()
+    HOST = args.host
+    SUBNET = ip_to_subnet(args.host)
     if len(sys.argv) == 2:
         host = sys.argv[1]
     else:
