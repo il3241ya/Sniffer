@@ -4,16 +4,23 @@ import socket
 import os
 import threading
 import time
+import argparse
 
 from src.ip import IP
 from src.icmp import ICMP
 
-MESSAGE = 'PYTHON!!'
-HOST = '192.168.0.182'
-SUBNET = '192.168.0.0/24'
+MESSAGE = 'CHECKMESSAGE'
+HOST  = '' # CHANGE THIS
+SUBNET = '' # CHANGE THIS
 
 
 class Scanner:
+    """
+    Initializes the Scanner object.
+
+    Args:
+        host (str): The host IP address to bind the socket.
+    """
     def __init__(self, host):
         self.host = host
         if os.name == 'nt':
@@ -29,12 +36,19 @@ class Scanner:
         if os.name == 'nt':
             self.socket,ioctl(socket.SIO_RCVALL, socket.RCVALL_ON)
 
+    @staticmethod
     def udp_sender():
+        """
+        Sends UDP messages to all hosts in the specified subnet.
+        """
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sender:
             for ip in ipaddress.ip_network(SUBNET).hosts():
                 sender.sendto(bytes(MESSAGE, 'utf8'), (str(ip), 65212))
 
     def sniff(self):
+        """
+        Sniffs incoming packets, detects hosts, and prints a summary.
+        """
         hosts_up = set([f'{str(self.host)} *'])
         try:
             while True:
@@ -64,7 +78,6 @@ class Scanner:
                     print(f'{host}')
             print('')
             sys.exit()
-
 
 
 if __name__ == "__main__":
