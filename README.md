@@ -30,6 +30,7 @@ Run the network sniffer using the following command:
 
 ```bash
 python scanner.py [host_ip]
+```
 
 ### Command Line Options
 
