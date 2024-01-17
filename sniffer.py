@@ -10,8 +10,6 @@ from src.ip import IP
 from src.icmp import ICMP
 
 MESSAGE = 'CHECKMESSAGE'
-HOST  = '' 
-SUBNET = '' 
 
 
 class Scanner:
