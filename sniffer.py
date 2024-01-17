@@ -89,15 +89,12 @@ def ip_to_subnet(ip):
     return network
 
 if __name__ == "__main__":
-    args = parser_arguments()
-    HOST = args.host
-    SUBNET = ip_to_subnet(args.host)
-    if len(sys.argv) == 2:
-        host = sys.argv[1]
-    else:
-        host = HOST
+
+    HOST  = '172.17.0.1' 
+    SUBNET = '172.17.0.0/16' 
+
     print('Start sniffing...')
-    s = Scanner(host)
+    s = Scanner(HOST)
     time.sleep(5)
     t = threading.Thread(target=Scanner.udp_sender)
     t.start()

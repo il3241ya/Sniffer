@@ -29,7 +29,9 @@ These instructions will help you set up and run the network scanner on your loca
 Run the network sniffer using the following command:
 
 ```bash
-python scanner.py [host_ip]
+sudo docker build -t [image_name] .
+
+docker run --network host [image_name]
 ```
 
 ### Command Line Options
